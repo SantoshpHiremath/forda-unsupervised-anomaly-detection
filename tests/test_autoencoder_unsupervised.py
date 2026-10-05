@@ -1,6 +1,6 @@
 """
 Tests for the unsupervised autoencoder: correctness of the training/
-scoring mechanics, AND the honesty discipline (never trained on labels,
+scoring mechanics, AND the evaluation discipline (never trained on labels,
 never trained on abnormal data, threshold chosen without seeing test
 labels).
 """
@@ -17,7 +17,7 @@ from src.pipeline import split_dataset, run_unsupervised_pipeline
 
 def test_train_autoencoder_signature_never_takes_labels():
     """
-    Structural honesty check: train_autoencoder's signature has no
+    Structural check: train_autoencoder's signature has no
     parameter for labels at all -- it is not merely "unused," it is
     architecturally impossible to pass labels into training, which is a
     stronger guarantee than a docstring promise.

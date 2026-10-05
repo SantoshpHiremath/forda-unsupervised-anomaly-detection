@@ -2,7 +2,7 @@
 End-to-end pipeline: generate data, split, train the unsupervised
 autoencoder on normal-only data, choose a threshold from a normal-only
 validation split, evaluate against the true test labels, run the
-semi-supervised label-budget comparison, and print an honest summary.
+semi-supervised label-budget comparison, and print a summary.
 """
 
 import numpy as np

@@ -11,7 +11,7 @@ reconstructs well is "normal-shaped," one it reconstructs poorly is
 anomalous. Labels are used only afterward, to score how well this
 worked -- never as a training signal. That is the actual distinction
 between this and supervised classification (e.g. the logistic-regression
-classifiers elsewhere in this portfolio, which train directly on labels).
+classifiers, which train directly on labels).
 """
 
 import numpy as np

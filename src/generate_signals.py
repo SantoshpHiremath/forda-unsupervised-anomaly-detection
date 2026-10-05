@@ -3,17 +3,13 @@ Synthetic motor-signal generator, shaped like the real FordA dataset
 (UCR/UEA time-series archive): univariate signals, 500 timesteps per
 sample, binary label (normal / abnormal engine noise measurement).
 
-This is NOT the real FordA dataset. This sandbox has no outbound access
-to OpenML, Zenodo, or the UCR/UEA time-series archive (all three were
-tried and returned a 403 from the sandbox's outbound proxy, the same
-network constraint documented in other projects in this portfolio, e.g.
-Docker Hub being blocked for devops-cicd-monitoring). Rather than fake
-having downloaded FordA, this module generates a synthetic dataset with
-the same shape and the same real-world framing (engine noise signal
-measured on a motor with normal/abnormal symptom classes), so the rest
-of the project — genuinely unsupervised and semi-supervised anomaly
-detection, honestly evaluated — is built and verified against real,
-inspectable data, just not real Ford data.
+The data is synthetic: the real FordA dataset was not reachable from the
+build environment (OpenML, Zenodo, UCR/UEA archive). This module generates
+a dataset with the same shape and the same framing (engine noise signal
+measured on a motor with normal/abnormal symptom classes), so the rest of
+the project — unsupervised and semi-supervised anomaly detection — is
+built and verified against inspectable generated data. It is the only
+module that would need swapping for the real FordA data.
 
 The signal model: a normal signal is a smooth combination of a few sine
 components (simulating periodic mechanical vibration) plus small Gaussian
@@ -100,10 +96,9 @@ def generate_dataset(n_samples=3601, anomaly_fraction=0.42, seed=42, n_timesteps
 
     Returns (X, y, fault_labels) where fault_labels is None for normal
     rows and the fault type string for abnormal rows (kept separately so
-    training code can honestly avoid using it — it is NOT a training
-    signal, only used afterward for honest evaluation and root-cause
-    inspection, the same "don't use labels you shouldn't have" discipline
-    as the rest of this portfolio).
+    training code can avoid using it — it is NOT a training
+    signal, only used afterward for evaluation and root-cause
+    inspection, keeping labels out of training).
     """
     rng = np.random.default_rng(seed)
     n_anomalous = int(round(n_samples * anomaly_fraction))

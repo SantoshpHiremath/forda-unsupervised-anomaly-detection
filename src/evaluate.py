@@ -1,5 +1,5 @@
 """
-Honest evaluation harness for the unsupervised autoencoder detector and
+Evaluation harness for the unsupervised autoencoder detector and
 the semi-supervised comparison.
 
 The discipline this module enforces (checked by tests, not just
@@ -7,8 +7,7 @@ described): the anomaly threshold is chosen using ONLY normal-class
 data (a held-out validation split of normal signals never seen in
 training), never by peeking at the test set's true labels. True labels
 are used strictly for scoring after predictions are already fixed --
-the same "don't let the answer key leak into the decision" pattern used
-in this portfolio's other honestly-evaluated projects.
+the same "don't let the answer key leak into the decision" pattern.
 """
 
 import numpy as np
@@ -53,8 +52,7 @@ def evaluate_predictions(y_true, y_pred, scores):
 def semi_supervised_baseline_auc(X_train, y_train, X_test, y_test, label_fraction, seed=0):
     """
     Semi-supervised comparison: train a supervised classifier (logistic
-    regression, same honest-evaluation family as the rest of this
-    portfolio) using only `label_fraction` of the available training
+    regression) using only `label_fraction` of the available training
     labels, simulating the real-world constraint semi-supervised methods
     exist to address -- labels are expensive, so most of the data is
     unlabeled. This is a *baseline* to compare the unsupervised

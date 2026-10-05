@@ -30,7 +30,7 @@ def test_semi_supervised_auc_degrades_as_labels_shrink():
     assert auc_full - auc_scarce > 0.02, (
         f"expected a real degradation from full labels ({auc_full:.4f}) "
         f"to a 2% label budget ({auc_scarce:.4f}), but the gap is too small "
-        "to demonstrate the semi-supervised motivation honestly"
+        "to demonstrate the semi-supervised motivation"
     )
 
 
@@ -38,7 +38,7 @@ def test_semi_supervised_with_degenerate_single_class_sample_returns_none():
     """
     If the tiny label budget happens to sample only one class, fitting a
     binary classifier is impossible -- the function must report this
-    honestly (return None) rather than crash or silently fabricate a
+    (return None) rather than crash or silently fabricate a
     result.
     """
     X = np.random.default_rng(0).normal(size=(20, 5))
